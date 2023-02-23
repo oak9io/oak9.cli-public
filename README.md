@@ -50,7 +50,7 @@ Here's an example of using `oak9cli` to scan a directory containing Terraform:
 
 ## Author
 
-This project was created by [oak9 inc.](https://oak9.io/).
+This project was created by [oak9 inc.](https://oak9.io/)
 
 ## License
 
