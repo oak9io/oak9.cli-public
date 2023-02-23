@@ -48,9 +48,13 @@ Here's an example of using `oak9cli` to scan a directory containing Terraform:
 ![Graphs](files/Graphs.png)
 ![Vulnerabilites](files/ExampleVulns.png)
 
+# More Documentation
+
+![Documentation](https://docs.oak9.io/oak9/fundamentals/integrations/cli-integration)
+
 ## Author
 
-This project was created by [oak9 inc.](https://oak9.io/)
+This project was created by [oak9 inc.](https://oak9.io/).
 
 ## License
 
