@@ -4,11 +4,9 @@
 
 `oak9cli` is a command-line utility that scans your IaC for security vulnerabilites. Please visit [home page](https://oak9.io) for more info.
 
-## Installation
-
 ### Binary release
 
-To install `oak9cli`, you can download the latest binary release from the [releases page](https://github.com/oak9io/oak9.cli-public/releases).
+To use the `oak9cli`, you can download the latest binary release from the [releases page](https://github.com/oak9io/oak9.cli-public/releases).
 
 ## Usage
 
@@ -20,7 +18,6 @@ The basic usage of `oak9cli` is as follows:
 
 Available Commands:
 
-- `completion`: Generate the autocompletion script for the specified shell
 - `configure`: Configure oak9 cli settings
 - `help`: Help about any command
 - `scan`: Scan a given IaC directory and report on security violations
@@ -43,7 +40,7 @@ Here's an example of using `oak9cli` to scan a directory containing Terraform:
 ./oak9 scan -p "{Project_ID}" -k "{APIToken} -d ./IAC/"
 ```
 
-## UI
+## oak9 UI
 
 ![Graphs](files/Graphs.png)
 ![Vulnerabilites](files/ExampleVulns.png)
