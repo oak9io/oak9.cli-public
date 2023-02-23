@@ -50,7 +50,7 @@ Here's an example of using `oak9cli` to scan a directory containing Terraform:
 
 # More Documentation
 
-![Documentation](https://docs.oak9.io/oak9/fundamentals/integrations/cli-integration)
+[Documentation](https://docs.oak9.io/oak9/fundamentals/integrations/cli-integration)
 
 ## Author
 
