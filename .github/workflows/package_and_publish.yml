@@ -19,8 +19,9 @@ jobs:
       - name: Fetch latest release version
         run: |
           echo "LATEST_RELEASE=$(git tag --list 'v*' | tail -1)" >> $GITHUB_ENV
-          git tag --list 'v*' | tail -1     
-      - name: Test
-        run: echo ${{ env.LATEST_RELEASE }}
-
+      
+      - name: Homebrew
+        uses: ./.github/workflows/homebrew.yml
+        with:
+          LATEST_RELEASE: ${{ env.LATEST_RELEASE }}
 
