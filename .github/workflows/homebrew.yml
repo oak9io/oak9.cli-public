@@ -28,7 +28,7 @@ jobs:
           cat ./package_managers/homebrew/oak9.rb
 
       - name: Sync homebrew-cask with upstream
-        uses: tgymnich/fork-sync@v1.8
+        uses: tgymnich/fork-sync@v1.2.1
         with:
           token: ${{ secrets.OAK9_HOMEBREW_PUBLISH_PRIVATE_KEY }}
           owner: oak9io
