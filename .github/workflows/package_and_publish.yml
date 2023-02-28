@@ -12,11 +12,14 @@ jobs:
   package_publish:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - name: Fetch latest release version
         run: |
           echo "LATEST_RELEASE=$(git tag --list 'v*' | tail -1)" >> $GITHUB_ENV
-          git tag --list 'v*' | tail -1
-        shell: bash 
+          git tag --list 'v*' | tail -1     
       - name: Test
         run: echo ${{ env.LATEST_RELEASE }}
 
