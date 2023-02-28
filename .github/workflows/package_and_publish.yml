@@ -1,9 +1,7 @@
 name: oak9 cli Package Management Workflow
 run-name: ${{ github.actor }} oak9 cli Package Management Workflow
 on:
-  workflow_dispatch:
-
-  push:
+  push
 
 #Once tested enabled on release
 #on:
@@ -11,19 +9,24 @@ on:
 #    types: created
 
 jobs:
-  package_publish:
+  setup:
     runs-on: ubuntu-latest
+    outputs: 
+      LATEST_RELEASE: ${{ steps.tag.outputs.LATEST_RELEASE }}
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Fetch latest release version
+        id: tag
         run: |
-          echo "LATEST_RELEASE=$(git tag --list 'v*' | tail -1)" >> $GITHUB_ENV
-      
-      - name: Homebrew
-        uses: ./.github/workflows/homebrew.yml
-        with:
-          LATEST_RELEASE: ${{ env.LATEST_RELEASE }}
+          echo "LATEST_RELEASE=$(git tag --list 'v*' | tail -1)" >> $GITHUB_OUTPUT
+  
+  homebrew:    
+    name: Homebrew
+    needs: setup
+    uses: ./.github/workflows/homebrew.yml
+    with:
+      LATEST_RELEASE: ${{ needs.setup.outputs.LATEST_RELEASE }}
 
