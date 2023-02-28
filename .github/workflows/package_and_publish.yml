@@ -1,7 +1,7 @@
 name: oak9 cli Package Management Workflow
 run-name: ${{ github.actor }} oak9 cli Package Management Workflow
-
 on:
+  workflow_dispatch:
   push
 #Once tested enabled on release
 #on:
