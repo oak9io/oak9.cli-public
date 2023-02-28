@@ -1,0 +1,24 @@
+name: oak9 cli Package Management Workflow
+run-name: ${{ github.actor }} oak9 cli Package Management Workflow
+
+on:
+  push
+#Once tested enabled on release
+#on:
+#  release:
+#    types: created
+
+jobs:
+  package_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Fetch latest release version
+        id: fetch-latest-release
+        uses: reloc8/action-latest-release-version@1.0.0
+
+      - name: Test
+        run: echo ${{ steps.fetch-latest-release.outputs.latest-release }}
+
+
