@@ -16,7 +16,7 @@ jobs:
 
       - name: Fetch latest release version
         run: |
-          echo "LATEST_RELEASE=$(git describe --abbrev=0 --tags)" >> $GITHUB_ENV
+          echo "LATEST_RELEASE=$(git tag --list 'v*' | tail -1)" >> $GITHUB_ENV
       
       - name: Test
         run: echo ${{ env.LATEST_RELEASE }}
