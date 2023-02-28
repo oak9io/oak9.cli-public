@@ -27,11 +27,9 @@ jobs:
           sed -i'' -e "s/_SHA256_/$ZIP_SHA/g" ./package_managers/homebrew/oak9.rb
           cat ./package_managers/homebrew/oak9.rb
 
-      - name: Sync homebrew-cask with upstream
+      - name: Sync homebrew with upstream
         uses: tgymnich/fork-sync@v1.2.1
         with:
           token: ${{secrets.SERVICES_OAK9_PAT}}
           owner: oak9io
           repo: homebrew-cask
-          base: master
-          head: master
