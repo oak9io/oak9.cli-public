@@ -15,15 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get SHA256
+      - name: Setup
         run: |
-          VERSION=$(echo "${LATEST_RELEASE//v}")
-          ZIP_SHA=$(sha256sum ./binaries/iac-mac_os-$VERSION.zip | awk '{print $1}')
+          echo "VERSION=$(echo "${LATEST_RELEASE//v}")" >> $GITHUB_ENV
+          echo "ZIP_SHA=$(sha256sum ./binaries/iac-mac_os-$VERSION.zip | awk '{print $1}')" >> $GITHUB_ENV
           echo $ZIP_SHA
 
-      # - name: Update oak9 homebrew file
-      #   run: |
-      #     sed -i'' -e "s/_VERSION_/$VERSION/g" ./package_managers/homebrew/oak9.rb
-      #     sed -i'' -e "s/_SHA256_/$ZIP_SHA/g" ./package_managers/homebrew/oak9.rb
-      #     cat ./package_managers/homebrew/oak9.rb
-         
+      - name: Update oak9 homebrew file
+        run: |
+          sed -i'' -e "s/_VERSION_/$VERSION/g" ./package_managers/homebrew/oak9.rb
+          sed -i'' -e "s/_SHA256_/$ZIP_SHA/g" ./package_managers/homebrew/oak9.rb
+          cat ./package_managers/homebrew/oak9.rb
