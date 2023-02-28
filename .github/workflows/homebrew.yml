@@ -11,11 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       LATEST_RELEASE: ${{ inputs.LATEST_RELEASE }}
+    
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Get SHA256
-      run: |
-        VERSION=$(echo "${LATEST_RELEASE//v}")
-        ZIP_SHA=$(sha256sum ./binaries/iac-mac_os-$VERSION.zip | awk '{print $1}')
-        echo $ZIP_SHA
+      - name: Get SHA256
+        run: |
+          VERSION=$(echo "${LATEST_RELEASE//v}")
+          ZIP_SHA=$(sha256sum ./binaries/iac-mac_os-$VERSION.zip | awk '{print $1}')
+          echo $ZIP_SHA
