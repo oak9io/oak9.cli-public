@@ -19,7 +19,6 @@ jobs:
         run: |
           VERSION=$(echo "${LATEST_RELEASE//v}")
           echo "ZIP_SHA=$(sha256sum ./binaries/iac-mac_os-$VERSION.zip | awk '{print $1}')" >> $GITHUB_ENV
-          echo $ZIP_SHA
 
       - name: Update oak9 homebrew file
         run: |
@@ -27,3 +26,12 @@ jobs:
           sed -i'' -e "s/_VERSION_/$VERSION/g" ./package_managers/homebrew/oak9.rb
           sed -i'' -e "s/_SHA256_/$ZIP_SHA/g" ./package_managers/homebrew/oak9.rb
           cat ./package_managers/homebrew/oak9.rb
+
+      - name: Sync homebrew-cask with upstream
+        uses: tgymnich/fork-sync@v1.8
+        with:
+          token: ${{ secrets.OAK9_HOMEBREW_PUBLISH_PRIVATE_KEY }}
+          owner: oak9io
+          repo: homebrew-cask
+          base: master
+          head: master
