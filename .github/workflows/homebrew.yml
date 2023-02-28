@@ -30,7 +30,7 @@ jobs:
       - name: Sync homebrew-cask with upstream
         uses: tgymnich/fork-sync@v1.2.1
         with:
-          token: ${{ secrets.OAK9_HOMEBREW_PUBLISH_PRIVATE_KEY }}
+          token: ${{secrets.SERVICES_OAK9_PAT}}
           owner: oak9io
           repo: homebrew-cask
           base: master
