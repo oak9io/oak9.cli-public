@@ -61,6 +61,6 @@ jobs:
           user-email: systems@oak9.io
           target-branch: ${{ env.LATEST_RELEASE }}
           target-directory: Casks
-          commit-message: 'New oak9 cli $VERSION'
+          commit-message: New oak9 cli ${{ env.LATEST_RELEASE }}
 
       #- name: Create PR on homebrew fork
