@@ -44,6 +44,14 @@ jobs:
           sed -i'' -e "s/  version.*/  version \"$VERSION\"/" ./homebrew-cask/Casks/oak9.rb
           cat ./homebrew-cask/Casks/oak9.rb
 
+      - name: Create Branch on homebrew repo
+        uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
+        with:
+          repository_owner: oak9io
+          repository_name: homebrew-cask
+          new_branch_name: test1
+          access_token: ${{ secrets.PAT }}
+
       - name: Push updated files to homebrew repo
         uses: cpina/github-action-push-to-another-repository@main
         env:
@@ -53,6 +61,6 @@ jobs:
           destination-github-username: oak9io
           destination-repository-name: 'homebrew-cask'
           user-email: systems@oak9.io
-          target-branch: $VERSION
+          target-branch: test1
           target-directory: Casks
           commit-message: 'New oak9 cli $VERSION'
