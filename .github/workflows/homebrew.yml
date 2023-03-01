@@ -30,7 +30,7 @@ jobs:
       - name: Sync homebrew with upstream
         uses: tgymnich/fork-sync@v1.8
         with:
-          token: ${{ secrets.SERVICES_OAK9_PAT }}
+          #token: ${{ secrets.SERVICES_OAK9_PAT }}
           owner: oak9io
           repo: homebrew-cask
         #uses: TobKed/github-forks-sync-action@master
