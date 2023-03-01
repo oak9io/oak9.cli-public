@@ -40,6 +40,6 @@ jobs:
       - name: Update oak9 homebrew file
         run: |
           VERSION=$(echo "${LATEST_RELEASE//v}")
-          sed -i'' -e "s/  sha256.*/  sha256 "$ZIP_SHA"/" ./homebrew-cask/Cask/oak9.rb
-          sed -i'' -e "s/  version.*/  version "$VERSION"/" ./homebrew-cask/Cask/oak9.rb
+          sed -i'' -e "s/  sha256.*/  sha256 "$ZIP_SHA"/" ./homebrew-cask/Casks/oak9.rb
+          sed -i'' -e "s/  version.*/  version "$VERSION"/" ./homebrew-cask/Casks/oak9.rb
           cat ./homebrew-cask/Cask/oak9.rb
