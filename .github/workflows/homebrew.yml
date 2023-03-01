@@ -37,12 +37,12 @@ jobs:
           repository: oak9io/homebrew-cask
           path: homebrew-cask
 
-      - uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
-        with:
-          repository_owner: oak9io
-          repository_name: homebrew-cask
-          new_branch_name: ${{ env.LATEST_RELEASE }}
-          access_token: ${{ secrets.PAT }}
+      #- uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
+      #  with:
+      #    repository_owner: oak9io
+      #    repository_name: homebrew-cask
+      #    new_branch_name: ${{ env.LATEST_RELEASE }}
+      #    access_token: ${{ secrets.PAT }}
 
       - name: Update oak9 homebrew file
         run: |
