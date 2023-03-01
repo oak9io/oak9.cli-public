@@ -31,13 +31,13 @@ jobs:
           upstream_repository: Homebrew/homebrew-cask
           target_repository: oak9io/homebrew-cask
 
-       - name: Create Branch on homebrew repo
-         uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
-         with:
-           repository_owner: oak9io
-           repository_name: homebrew-cask
-           new_branch_name: test1
-           access_token: ${{ secrets.PAT }}
+      - name: Create Branch on homebrew repo
+        uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
+        with:
+          repository_owner: oak9io
+          repository_name: homebrew-cask
+          new_branch_name: test1
+          access_token: ${{ secrets.PAT }}
       #- name: Checkout homebrew fork
       #  uses: actions/checkout@v3
       #  with:
