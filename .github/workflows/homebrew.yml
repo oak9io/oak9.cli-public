@@ -1,0 +1,66 @@
+name: Deploy cli to homebrew
+on:
+  workflow_call:
+    inputs:
+      LATEST_RELEASE:
+        required: true
+        type: string
+    secrets:
+      PAT:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      LATEST_RELEASE: ${{ inputs.LATEST_RELEASE }}
+    
+    steps:
+      - name: Checkout cli-public repo 
+        uses: actions/checkout@v3
+
+      - name: Setup
+        run: |
+          VERSION=$(echo "${LATEST_RELEASE//v}")
+          echo "ZIP_SHA=$(sha256sum ./binaries/iac-mac_os-$VERSION.zip | awk '{print $1}')" >> $GITHUB_ENV
+
+      - name: Sync homebrew with upstream
+        uses: TobKed/github-forks-sync-action@v0.2.0
+        with:
+          github_token: ${{ secrets.PAT }}
+          upstream_repository: Homebrew/homebrew-cask
+          target_repository: oak9io/homebrew-cask
+ 
+      - name: Cleanup so we can create a branch below
+        run: |
+          rm -rf ./homebrew-cask
+
+      - name: Create Branch on homebrew repo
+        uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
+        with:
+          repository_owner: oak9io
+          repository_name: homebrew-cask
+          new_branch_name: ${{ env.LATEST_RELEASE }}
+          access_token: ${{ secrets.PAT }}
+      
+      - name: Update oak9 homebrew file
+        run: |
+          VERSION=$(echo "${LATEST_RELEASE//v}")
+          sed -i'' -e "s/  sha256.*/  sha256 \"$ZIP_SHA\"/" ./homebrew-cask/Casks/oak9.rb
+          sed -i'' -e "s/  version.*/  version \"$VERSION\"/" ./homebrew-cask/Casks/oak9.rb
+          cat ./homebrew-cask/Casks/oak9.rb
+
+      - name: Push updated files to homebrew repo
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{secrets.PAT}}
+        with:
+          source-directory: './homebrew-cask/Casks/'
+          destination-github-username: oak9io
+          destination-repository-name: 'homebrew-cask'
+          user-email: systems@oak9.io
+          target-branch: ${{ env.LATEST_RELEASE }}
+          target-directory: Casks
+          commit-message: 'New oak9 cli $VERSION'
+
+      #- name: Create PR on homebrew fork
