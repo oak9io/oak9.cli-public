@@ -31,11 +31,18 @@ jobs:
           upstream_repository: Homebrew/homebrew-cask
           target_repository: oak9io/homebrew-cask
 
-      - name: Checkout homebrew fork
-        uses: actions/checkout@v3
-        with:
-          repository: oak9io/homebrew-cask
-          path: homebrew-cask
+       - name: Create Branch on homebrew repo
+         uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
+         with:
+           repository_owner: oak9io
+           repository_name: homebrew-cask
+           new_branch_name: test1
+           access_token: ${{ secrets.PAT }}
+      #- name: Checkout homebrew fork
+      #  uses: actions/checkout@v3
+      #  with:
+      #    repository: oak9io/homebrew-cask
+      #    path: homebrew-cask
 
       - name: Update oak9 homebrew file
         run: |
@@ -43,14 +50,6 @@ jobs:
           sed -i'' -e "s/  sha256.*/  sha256 \"$ZIP_SHA\"/" ./homebrew-cask/Casks/oak9.rb
           sed -i'' -e "s/  version.*/  version \"$VERSION\"/" ./homebrew-cask/Casks/oak9.rb
           cat ./homebrew-cask/Casks/oak9.rb
-
-      - name: Create Branch on homebrew repo
-        uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
-        with:
-          repository_owner: oak9io
-          repository_name: homebrew-cask
-          new_branch_name: test1
-          access_token: ${{ secrets.PAT }}
 
       - name: Push updated files to homebrew repo
         uses: cpina/github-action-push-to-another-repository@main
