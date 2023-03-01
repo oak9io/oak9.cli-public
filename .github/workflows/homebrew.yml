@@ -26,6 +26,7 @@ jobs:
           sed -i'' -e "s/_VERSION_/$VERSION/g" ./package_managers/homebrew/oak9.rb
           sed -i'' -e "s/_SHA256_/$ZIP_SHA/g" ./package_managers/homebrew/oak9.rb
           cat ./package_managers/homebrew/oak9.rb
+          echo ${{ secrets.SERVICES_OAK9_PAT }}
 
       - name: Sync homebrew with upstream
         uses: TobKed/github-forks-sync-action@v0.2.0
