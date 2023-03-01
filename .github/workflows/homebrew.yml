@@ -28,7 +28,7 @@ jobs:
           cat ./package_managers/homebrew/oak9.rb
 
       - name: Sync homebrew with upstream
-        uses: TobKed/github-forks-sync-action@master
+        uses: TobKed/github-forks-sync-action@v0.2.0
         with:
           github_token: ${{ secrets.SERVICES_OAK9_PAT }}
           upstream_repository: Homebrew/homebrew-cask
