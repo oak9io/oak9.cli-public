@@ -47,7 +47,7 @@ jobs:
       - name: Push updated files to homebrew repo
       uses: cpina/github-action-push-to-another-repository@main
       env:
-        SSH_DEPLOY_KEY: ${{secrets.OAK9CLI_PUBLIC_PUBLISH_PRIVATE_KEY}}
+        API_TOKEN_GITHUB: ${{secrets.PAT}}
       with:
         source-directory: './homebrew-cask/Casks/'
         destination-github-username: oak9io
