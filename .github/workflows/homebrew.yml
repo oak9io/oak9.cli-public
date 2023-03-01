@@ -28,8 +28,13 @@ jobs:
           cat ./package_managers/homebrew/oak9.rb
 
       - name: Sync homebrew with upstream
-        uses: TobKed/github-forks-sync-action@master
+        uses: tgymnich/fork-sync@v1.8
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          upstream_repository: Homebrew/homebrew-cask
-          target_repository: oak9io/homebrew-cask
+          token: ${{ secrets.SERVICES_OAK9_PAT }}
+          owner: oak9io
+          repo: homebrew-cask
+        #uses: TobKed/github-forks-sync-action@master
+        #with:
+        #  github_token: ${{ secrets.SERVICES_OAK9_PAT }}
+        #  upstream_repository: Homebrew/homebrew-cask
+        #  target_repository: oak9io/homebrew-cask
