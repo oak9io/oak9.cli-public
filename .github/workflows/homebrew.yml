@@ -41,7 +41,7 @@ jobs:
         with:
           repository_owner: oak9io
           repository_name: homebrew-cask
-          new_branch_name: {{ env.LATEST_RELEASE }}
+          new_branch_name: ${{ env.LATEST_RELEASE }}
           access_token: ${{ secrets.PAT }}
 
       - name: Update oak9 homebrew file
