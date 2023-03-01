@@ -24,12 +24,12 @@ jobs:
           VERSION=$(echo "${LATEST_RELEASE//v}")
           echo "ZIP_SHA=$(sha256sum ./binaries/iac-mac_os-$VERSION.zip | awk '{print $1}')" >> $GITHUB_ENV
 
-      - name: Sync homebrew with upstream
-        uses: TobKed/github-forks-sync-action@v0.2.0
-        with:
-          github_token: ${{ secrets.PAT }}
-          upstream_repository: Homebrew/homebrew-cask
-          target_repository: oak9io/homebrew-cask
+      #- name: Sync homebrew with upstream
+      #  uses: TobKed/github-forks-sync-action@v0.2.0
+      #  with:
+      #    github_token: ${{ secrets.PAT }}
+      #    upstream_repository: Homebrew/homebrew-cask
+      #    target_repository: oak9io/homebrew-cask
 
       - name: Create Branch on homebrew repo
         uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
