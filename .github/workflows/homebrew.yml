@@ -43,12 +43,6 @@ jobs:
           new_branch_name: ${{ env.LATEST_RELEASE }}
           access_token: ${{ secrets.PAT }}
       
-      #- name: Checkout homebrew fork
-      #  uses: actions/checkout@v3
-      #  with:
-      #    repository: oak9io/homebrew-cask
-      #    path: homebrew-cask
-
       - name: Update oak9 homebrew file
         run: |
           VERSION=$(echo "${LATEST_RELEASE//v}")
@@ -68,3 +62,5 @@ jobs:
           target-branch: ${{ env.LATEST_RELEASE }}
           target-directory: Casks
           commit-message: 'New oak9 cli $VERSION'
+
+      #- name: Create PR on homebrew fork
