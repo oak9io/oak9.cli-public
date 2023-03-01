@@ -31,17 +31,17 @@ jobs:
           upstream_repository: Homebrew/homebrew-cask
           target_repository: oak9io/homebrew-cask
  
-      - name: test
+      - name: Cleanup so we can create a branch below
         run: |
-          ls -al
+          rm -rf ./homebrew-cask
 
-      #- name: Create Branch on homebrew repo
-      #  uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
-      #  with:
-      #    repository_owner: oak9io
-      #    repository_name: homebrew-cask
-      #    new_branch_name: ${{ env.LATEST_RELEASE }}
-      #    access_token: ${{ secrets.PAT }}
+      - name: Create Branch on homebrew repo
+        uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
+        with:
+          repository_owner: oak9io
+          repository_name: homebrew-cask
+          new_branch_name: ${{ env.LATEST_RELEASE }}
+          access_token: ${{ secrets.PAT }}
       
       #- name: Checkout homebrew fork
       #  uses: actions/checkout@v3
@@ -65,6 +65,6 @@ jobs:
           destination-github-username: oak9io
           destination-repository-name: 'homebrew-cask'
           user-email: systems@oak9.io
-          target-branch: test1
+          target-branch: ${{ env.LATEST_RELEASE }}
           target-directory: Casks
           commit-message: 'New oak9 cli $VERSION'
