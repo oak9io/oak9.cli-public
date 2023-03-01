@@ -29,4 +29,5 @@ jobs:
     uses: ./.github/workflows/homebrew.yml
     with:
       LATEST_RELEASE: ${{ needs.setup.outputs.LATEST_RELEASE }}
-
+    secrets:
+      PAT: ${{ secrets.SERVICES_OAK9_PAT }}

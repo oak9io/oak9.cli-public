@@ -5,6 +5,9 @@ on:
       LATEST_RELEASE:
         required: true
         type: string
+    secrets:
+      PAT:
+        required: true
 
 jobs:
   deploy:
@@ -31,6 +34,6 @@ jobs:
       - name: Sync homebrew with upstream
         uses: TobKed/github-forks-sync-action@v0.2.0
         with:
-          github_token: ${{ secrets.SERVICES_OAK9_PAT }}
+          github_token: ${{ secrets.PAT }}
           upstream_repository: Homebrew/homebrew-cask
           target_repository: oak9io/homebrew-cask
