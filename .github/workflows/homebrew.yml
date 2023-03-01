@@ -45,14 +45,14 @@ jobs:
           cat ./homebrew-cask/Casks/oak9.rb
 
       - name: Push updated files to homebrew repo
-      uses: cpina/github-action-push-to-another-repository@main
-      env:
-        API_TOKEN_GITHUB: ${{secrets.PAT}}
-      with:
-        source-directory: './homebrew-cask/Casks/'
-        destination-github-username: oak9io
-        destination-repository-name: 'homebrew-cask'
-        user-email: systems@oak9.io
-        target-branch: $VERSION
-        target-directory: Casks
-        commit-message: 'New oak9 cli $VERSION'
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{secrets.PAT}}
+        with:
+          source-directory: './homebrew-cask/Casks/'
+          destination-github-username: oak9io
+          destination-repository-name: 'homebrew-cask'
+          user-email: systems@oak9.io
+          target-branch: $VERSION
+          target-directory: Casks
+          commit-message: 'New oak9 cli $VERSION'
