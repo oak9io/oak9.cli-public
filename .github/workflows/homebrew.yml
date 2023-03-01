@@ -16,20 +16,13 @@ jobs:
       LATEST_RELEASE: ${{ inputs.LATEST_RELEASE }}
     
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout cli-public repo 
+        uses: actions/checkout@v3
 
       - name: Setup
         run: |
           VERSION=$(echo "${LATEST_RELEASE//v}")
           echo "ZIP_SHA=$(sha256sum ./binaries/iac-mac_os-$VERSION.zip | awk '{print $1}')" >> $GITHUB_ENV
-
-      - name: Update oak9 homebrew file
-        run: |
-          VERSION=$(echo "${LATEST_RELEASE//v}")
-          sed -i'' -e "s/_VERSION_/$VERSION/g" ./package_managers/homebrew/oak9.rb
-          sed -i'' -e "s/_SHA256_/$ZIP_SHA/g" ./package_managers/homebrew/oak9.rb
-          cat ./package_managers/homebrew/oak9.rb
-          echo ${{ secrets.SERVICES_OAK9_PAT }}
 
       - name: Sync homebrew with upstream
         uses: TobKed/github-forks-sync-action@v0.2.0
@@ -37,3 +30,16 @@ jobs:
           github_token: ${{ secrets.PAT }}
           upstream_repository: Homebrew/homebrew-cask
           target_repository: oak9io/homebrew-cask
+
+      - name: Checkout homebrew fork
+        uses: actions/checkout@v3
+        with:
+          repository: oak9io/homebrew-cask
+          path: homebrew-cask
+
+      - name: Update oak9 homebrew file
+        run: |
+          VERSION=$(echo "${LATEST_RELEASE//v}")
+          sed -i'' -e "s/  sha256.*/  sha256 "$ZIP_SHA"/" ./homebrew-cask/Cask/oak9.rb
+          sed -i'' -e "s/  version.*/  version "$VERSION"/" ./homebrew-cask/Cask/oak9.rb
+          cat ./homebrew-cask/Cask/oak9.rb
